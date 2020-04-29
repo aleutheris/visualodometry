@@ -10,3 +10,7 @@
 **/Samples
 **/Theses
 **/input parameter.xlsx
+
+build/
+*/*/.project
+*/*/*/*/*/*.cpp.o
