@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(directory_test)
+project(visualodometry)
 
 # Build type
 set(CMAKE_BUILD_TYPE Release)
