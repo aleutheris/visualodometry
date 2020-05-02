@@ -12,5 +12,5 @@
 **/input parameter.xlsx
 
 build/
-*/*/.project
+*/.project
 */*/*/*/*/*.cpp.o

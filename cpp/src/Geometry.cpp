@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Geometry.h"
+#include "Geometry.hpp"
 
 int Geometry::get_sum(int number1, int number2)
 {

@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "Geometry.h"
+#include "Geometry.hpp"
 
-int main(int argc, char *argv[])
+int main()
 {
   Geometry g;
   int number1 = 1;

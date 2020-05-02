@@ -21,7 +21,7 @@ include_directories(include)
 # Generate the shared library from the sources
 add_library(Geometry SHARED src/Geometry.cpp)
 
-set(LIBS_TEST_STUDENT libGeometry.so)
+set(LIBS_GEOMETRY libGeometry.so)
 
 # Folder where libraies are placed
 link_directories(build)
@@ -29,4 +29,11 @@ link_directories(build)
 
 # Generate the executables
 add_executable(testStudent src/mainapp.cpp)
-target_link_libraries(testStudent ${LIBS_TEST_STUDENT})
+target_link_libraries(testStudent ${LIBS_GEOMETRY})
+
+# Testing
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+add_executable(testGeometry tst/testGeometry.cpp)
+target_link_libraries(testGeometry ${GTEST_LIBRARIES} pthread ${LIBS_GEOMETRY})
