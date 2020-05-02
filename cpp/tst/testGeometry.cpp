@@ -3,7 +3,6 @@
 
 #include "Geometry.hpp"
 
-using std::runtime_error;
 using namespace ::testing;
 
 class TestGeometry : public Test
