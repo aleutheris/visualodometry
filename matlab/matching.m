@@ -1,19 +1,23 @@
 classdef matching
     
+    % LINES COMMENTED OUT AFTER THESIS
+    % 302 340 378 416    
+    
+    
     methods (Static)
         
-%         % Adiciona distância dist ao vetor v, ordenadamente
+%         % Adiciona dist??ncia dist ao vetor v, ordenadamente
 %         function v = addDistance(v, dist)
 %             len = length(v);
 %             
-%             if dist==0   % Se v está vazio
+%             if dist==0   % Se v est?? vazio
 %                 return;
 %             elseif len==1   % Se v tem apenas um elemento
 %                 if v==0
 %                     v = dist;
-%                 elseif v>=dist  % Se a primeira posição de v for maior que dist
+%                 elseif v>=dist  % Se a primeira posi????o de v for maior que dist
 %                     v = [dist v];
-%                 else %Caso contrário
+%                 else %Caso contr??rio
 %                     v = [v dist];
 %                 end
 %             else
@@ -29,9 +33,9 @@ classdef matching
 %             end
 %         end
         
-        % Devolve a posição de cornerDists mais próxima de num, sendo k a
-        % posição que se ache mais provável de se encontrar
-        % cornerDists TÊM DE TER AS DISTÂNCIAS POR ORDEM CRESCENTE
+        % Devolve a posi????o de cornerDists mais pr??xima de num, sendo k a
+        % posi????o que se ache mais prov??vel de se encontrar
+        % cornerDists T??M DE TER AS DIST??NCIAS POR ORDEM CRESCENTE
         function [pos, content] = closestDistance(cornerDists,num,k)
             len = length(cornerDists);
             
@@ -40,7 +44,7 @@ classdef matching
             
             if len==1, pos = 1; content = cornerDists(pos); return; end
             
-            if abs(num-cornerDists(len)) <= abs(num-cornerDists(len-1))  % se num estiver mais perto do valor da posição final de cornerDists
+            if abs(num-cornerDists(len)) <= abs(num-cornerDists(len-1))  % se num estiver mais perto do valor da posi????o final de cornerDists
                 pos = len;
             elseif abs(num-cornerDists(1)) < abs(num-cornerDists(2))
                 pos = 1;
@@ -60,8 +64,8 @@ classdef matching
                 k=k+1;
                 difA = abs(num-cornerDists(k));
                 
-                % enquanto a (distancia do numero à posição mais próxima) for
-                % maior que a (distancia do numero da posição seguinte)
+                % enquanto a (distancia do numero ?? posi????o mais pr??xima) for
+                % maior que a (distancia do numero da posi????o seguinte)
                 while difB > difA
                     difB = difA;
                     k=k+1;
@@ -86,7 +90,7 @@ classdef matching
             content = cornerDists(pos);
         end
         
-        % Comparação feita entre distances1 e distances2
+        % Compara????o feita entre distances1 e distances2
 %         function [distancesRelation] = compareDistances(distances1, distances2, matchingDiferences)
 %              distancesRelation = struct('pos',[],'dif',[],'avgDif',Inf);
 %              x = xcorr(distances1,distances2);
@@ -95,7 +99,7 @@ classdef matching
 %              distancesRelation.avgDif = mean(abs(x(1:floor(len/2))-x(len:-1:ceil(len/2)+1)));
 %         end
             
-        % Comparação feita entre distances1 e distances2
+        % Compara????o feita entre distances1 e distances2
         function [distancesRelation] = compareDistances(distances1, distances2, compare)
             numCorners1 = length(distances1);
             numCorners2 = length(distances2);
@@ -114,11 +118,11 @@ classdef matching
                 [posCurrent,~] = matching.closestDistance(distances2,distances1(i),i);
                 
                 posPos = basic.thereIsNumber(distancesRelation.pos,posCurrent);
-                while posPos>0; % Ver se a posição posCurrent já foi registada
-                    if abs(distances1(i)-distances2(posCurrent)) < abs(distances1(posPos)-distances2(posCurrent))  % Comparação de distancias
+                while posPos>0; % Ver se a posi????o posCurrent j?? foi registada
+                    if abs(distances1(i)-distances2(posCurrent)) < abs(distances1(posPos)-distances2(posCurrent))  % Compara????o de distancias
                         distancesRelation.pos(posPos) = 0;
                         distancesRelation.dif(posPos) = 0;
-                    elseif posCurrent==numCorners2; %Verificar se j� chegou ao final do distances2
+                    elseif posCurrent==numCorners2; %Verificar se j??? chegou ao final do distances2
                         difNonzeros = distancesRelation.pos>0;
                         
                         avgDif = mean(distancesRelation.dif(difNonzeros));
@@ -144,7 +148,7 @@ classdef matching
                         
                         return;
                     else
-                        posCurrent=posCurrent+1; % A posi��o passa para pr�xima mais pr�xima
+                        posCurrent=posCurrent+1; % A posi??????o passa para pr???xima mais pr???xima
                     end
                     posPos = basic.thereIsNumber(distancesRelation.pos,posCurrent);
                 end
@@ -252,7 +256,7 @@ classdef matching
 %             matches.matchingQuality = entryDistancesSorted(1);
         end
         
-        % Encontra a melhor correspondência do array em db
+        % Encontra a melhor correspond??ncia do array em db
         function [bestMatch, bestMatchPos, bestMatchQuality] = arrayBestMatch(DB, array)
             bestMatchQuality = 0;
             
@@ -275,22 +279,22 @@ classdef matching
             end            
         end
         
-        % Devolve os números dos cantos da imagem 2 correspondentes à imagem 1
+        % Devolve os n??meros dos cantos da imagem 2 correspondentes ?? imagem 1
         function [matches, aMatches] = compareSigs(cornersSig, extractions, compare, constraints)
-            range1 = cornersSig(1).range.number(1):cornersSig(1).range.number(2);
-            range2 = cornersSig(2).range.number(1):cornersSig(2).range.number(2);
-            matches.mate2 = zeros(1, cornersSig(1).range.number(2)-cornersSig(1).range.number(1)+1);           
+            range1 = cornersSig(1).range.number(1) : cornersSig(1).range.number(2);
+            range2 = cornersSig(2).range.number(1) : cornersSig(2).range.number(2);
+            matches.mate2 = zeros(1, cornersSig(1).range.number(2) - cornersSig(1).range.number(1) + 1);           
 
             %aprovedMatches = zeros(2,compare.requestedMatches);
             
-            percentage=NaN;            
+            percentage = NaN;            
             
-            matches.details(1:range1(end),1:range2(end)) = struct('pos',[],'dif',[],'pos1',[],'avgDif',Inf);
+            matches.details(1:range1(end), 1:range2(end)) = struct('pos',[],'dif',[],'pos1',[],'avgDif',Inf);
             
-            indexes=zeros(2,range1(end)*range2(end));
-            indexesArray =  randperm(range1(end)*range2(end));
-            indexes(1,:) = kron(1:range1(end),ones([1 range2(end)]));
-            indexes(2,:) = repmat(1:range2(end),1,range1(end));            
+            indexes = zeros(2, range1(end) * range2(end));
+            indexesArray = randperm(range1(end) * range2(end));
+            indexes(1, :) = kron(1:range1(end), ones([1 range2(end)]));
+            indexes(2, :) = repmat(1:range2(end), 1, range1(end));            
             
             counter = 0;
             
@@ -298,12 +302,12 @@ classdef matching
                 
                 case 1
             
-                    for i=1:range1(end)*range2(end)
-                        if extractions(1).features.colorThrSymmetry( indexes(1,indexesArray(i)) ) == extractions(2).features.colorThrSymmetry( indexes(2,indexesArray(i)) )
+                    for i = 1:range1(end) * range2(end)
+                        %if extractions(1).features.colorThrSymmetry(indexes(1, indexesArray(i))) == extractions(2).features.colorThrSymmetry(indexes(2, indexesArray(i)))
                             if abs(cornersSig(1).c( indexes(1,indexesArray(i)) ).neighboursAngle-cornersSig(2).c( indexes(2,indexesArray(i)) ).neighboursAngle) < compare.triangleAngleDiff
                                 if sum( abs(cornersSig(1).c( indexes(1,indexesArray(i)) ).neighboursDists(:,1)-cornersSig(2).c( indexes(2,indexesArray(i)) ).neighboursDists(:,1)) ) < compare.triangleDistDiff
                                     %
-                                    %  %if sum( aprovedMatches(1,:) == indexes(1,indexesArray(i)) )==0 && sum( aprovedMatches(2,:) == indexes(2,indexesArray(i)) )==0  %verifica se uma das coordenadas já foi usada para fazer matching
+                                    %  %if sum( aprovedMatches(1,:) == indexes(1,indexesArray(i)) )==0 && sum( aprovedMatches(2,:) == indexes(2,indexesArray(i)) )==0  %verifica se uma das coordenadas j?? foi usada para fazer matching
                                     matches.details(indexes(1,indexesArray(i)), indexes(2,indexesArray(i))) = matching.compareDistances( cornersSig(1).c( indexes(1,indexesArray(i)) ).dists, cornersSig(2).c( indexes(2,indexesArray(i)) ).dists, compare );
                                     %
                                     if matches.details(indexes(1,indexesArray(i)), indexes(2,indexesArray(i))).avgDif < 0.8
@@ -328,7 +332,7 @@ classdef matching
                                     %
                                 end
                             end
-                        end
+                        %end
                         
                     end
                     fprintf('\n');
@@ -336,12 +340,12 @@ classdef matching
                     
                 case 2
                     
-                    for i=1:range1(end)*range2(end)
-                        if extractions(1).features.colorThrSymmetry( indexes(1,indexesArray(i)) ) == extractions(2).features.colorThrSymmetry( indexes(2,indexesArray(i)) )
+                    for i = 1:range1(end) * range2(end)
+                        %if extractions(1).features.colorThrSymmetry( indexes(1,indexesArray(i)) ) == extractions(2).features.colorThrSymmetry( indexes(2,indexesArray(i)) )
                             if abs(cornersSig(1).c( indexes(1,indexesArray(i)) ).neighboursAngle-cornersSig(2).c( indexes(2,indexesArray(i)) ).neighboursAngle) < compare.triangleAngleDiff
                                 %if sum( abs(cornersSig(1).c( indexes(1,indexesArray(i)) ).neighboursDists(:,1)-cornersSig(2).c( indexes(2,indexesArray(i)) ).neighboursDists(:,1)) ) < compare.triangleDistDiff
                                 %
-                                %  %if sum( aprovedMatches(1,:) == indexes(1,indexesArray(i)) )==0 && sum( aprovedMatches(2,:) == indexes(2,indexesArray(i)) )==0  %verifica se uma das coordenadas já foi usada para fazer matching
+                                %  %if sum( aprovedMatches(1,:) == indexes(1,indexesArray(i)) )==0 && sum( aprovedMatches(2,:) == indexes(2,indexesArray(i)) )==0  %verifica se uma das coordenadas j?? foi usada para fazer matching
                                 matches.details(indexes(1,indexesArray(i)), indexes(2,indexesArray(i))) = matching.compareDistances( cornersSig(1).c( indexes(1,indexesArray(i)) ).dists, cornersSig(2).c( indexes(2,indexesArray(i)) ).dists, compare );
                                 %
                                 if matches.details(indexes(1,indexesArray(i)), indexes(2,indexesArray(i))).avgDif < 0.8
@@ -366,7 +370,7 @@ classdef matching
                                 %
                                 %end
                             end
-                        end
+                        %end
                         
                     end
                     fprintf('\n');
@@ -375,11 +379,11 @@ classdef matching
                 case 3
                     
                     for i=1:range1(end)*range2(end)
-                        if extractions(1).features.colorThrSymmetry( indexes(1,indexesArray(i)) ) == extractions(2).features.colorThrSymmetry( indexes(2,indexesArray(i)) )
+                        %if extractions(1).features.colorThrSymmetry( indexes(1,indexesArray(i)) ) == extractions(2).features.colorThrSymmetry( indexes(2,indexesArray(i)) )
                             %if abs(cornersSig(1).c( indexes(1,indexesArray(i)) ).neighboursAngle-cornersSig(2).c( indexes(2,indexesArray(i)) ).neighboursAngle) < compare.triangleAngleDiff
                             %if sum( abs(cornersSig(1).c( indexes(1,indexesArray(i)) ).neighboursDists(:,1)-cornersSig(2).c( indexes(2,indexesArray(i)) ).neighboursDists(:,1)) ) < compare.triangleDistDiff
                             %
-                            %  %if sum( aprovedMatches(1,:) == indexes(1,indexesArray(i)) )==0 && sum( aprovedMatches(2,:) == indexes(2,indexesArray(i)) )==0  %verifica se uma das coordenadas já foi usada para fazer matching
+                            %  %if sum( aprovedMatches(1,:) == indexes(1,indexesArray(i)) )==0 && sum( aprovedMatches(2,:) == indexes(2,indexesArray(i)) )==0  %verifica se uma das coordenadas j?? foi usada para fazer matching
                             matches.details(indexes(1,indexesArray(i)), indexes(2,indexesArray(i))) = matching.compareDistances( cornersSig(1).c( indexes(1,indexesArray(i)) ).dists, cornersSig(2).c( indexes(2,indexesArray(i)) ).dists, compare );
                             %
                             if matches.details(indexes(1,indexesArray(i)), indexes(2,indexesArray(i))).avgDif < 0.8
@@ -404,7 +408,7 @@ classdef matching
                             %
                             %end
                             %end
-                        end
+                        %end
                         
                     end
                     fprintf('\n');
@@ -413,11 +417,11 @@ classdef matching
                 case 4
                     
                      for i=1:range1(end)*range2(end)
-                        if extractions(1).features.colorThrSymmetry( indexes(1,indexesArray(i)) ) == extractions(2).features.colorThrSymmetry( indexes(2,indexesArray(i)) )
+                        %if extractions(1).features.colorThrSymmetry( indexes(1,indexesArray(i)) ) == extractions(2).features.colorThrSymmetry( indexes(2,indexesArray(i)) )
                             %if abs(cornersSig(1).c( indexes(1,indexesArray(i)) ).neighboursAngle-cornersSig(2).c( indexes(2,indexesArray(i)) ).neighboursAngle) < compare.triangleAngleDiff
                             %if sum( abs(cornersSig(1).c( indexes(1,indexesArray(i)) ).neighboursDists(:,1)-cornersSig(2).c( indexes(2,indexesArray(i)) ).neighboursDists(:,1)) ) < compare.triangleDistDiff
                             %
-                            %  %if sum( aprovedMatches(1,:) == indexes(1,indexesArray(i)) )==0 && sum( aprovedMatches(2,:) == indexes(2,indexesArray(i)) )==0  %verifica se uma das coordenadas já foi usada para fazer matching
+                            %  %if sum( aprovedMatches(1,:) == indexes(1,indexesArray(i)) )==0 && sum( aprovedMatches(2,:) == indexes(2,indexesArray(i)) )==0  %verifica se uma das coordenadas j?? foi usada para fazer matching
                             matches.details(indexes(1,indexesArray(i)), indexes(2,indexesArray(i))) = matching.compareDistances( cornersSig(1).c( indexes(1,indexesArray(i)) ).dists, cornersSig(2).c( indexes(2,indexesArray(i)) ).dists, compare );
                             %
                             %if matches.details(indexes(1,indexesArray(i)), indexes(2,indexesArray(i))).avgDif < 0.8
@@ -442,7 +446,7 @@ classdef matching
                             %
                             %end
                             %end
-                        end
+                        %end
                         
                     end
                     fprintf('\n');
@@ -461,7 +465,7 @@ classdef matching
         end
         
         
-        % Devolve os números dos cantos da imagem 2 correspondentes à imagem 1
+        % Devolve os n??meros dos cantos da imagem 2 correspondentes ?? imagem 1
         function [matches] = compareSigsTesting(cornersSig, extractions, compare)            
             range1 = cornersSig(1).range.number(1):cornersSig(1).range.number(2);
             range2 = cornersSig(2).range.number(1):cornersSig(2).range.number(2);           
@@ -476,7 +480,7 @@ classdef matching
             for i1=range1
                 for i2=range2
                      if extractions(1).features.colorThrSymmetry( i1 ) == extractions(2).features.colorThrSymmetry( i2 )
-                        if sum( aprovedMatches(1,:)==i1 & aprovedMatches(2,:)==i2 ) == 0 %verifica se as coordenadas já foram usadas
+                        if sum( aprovedMatches(1,:)==i1 & aprovedMatches(2,:)==i2 ) == 0 %verifica se as coordenadas j?? foram usadas
                             
                             nbAg = false(1,compare.numberOfAngles);
                             nbDists = false(1,compare.numberOfAngles);
@@ -593,7 +597,7 @@ classdef matching
             while counter<n
                 ptr = randi(len,1);
                 
-                if sum(selectedData(1,:)==dataLink(1,ptr))==0 && sum(selectedData(2,:)==dataLink(2,ptr))==0 % só quando não existe nenhuma das coordenadas no selectedData 
+                if sum(selectedData(1,:)==dataLink(1,ptr))==0 && sum(selectedData(2,:)==dataLink(2,ptr))==0 % s?? quando n??o existe nenhuma das coordenadas no selectedData 
                     counter = counter + 1;
                     selectedData(:,counter) = dataLink(:,ptr);
                 end
@@ -628,8 +632,8 @@ classdef matching
             m2len = length(mate2Gen);
             
             % Indices
-            mate2TrueCalc = mate2Gen==mate2Calc;    % Cálculos iguais aos do gerador (bool)
-            mate2Diferences = not(mate2TrueCalc);   % Diferenças entre o mate2 gerado e o calculado (bool)
+            mate2TrueCalc = mate2Gen==mate2Calc;    % C??lculos iguais aos do gerador (bool)
+            mate2Diferences = not(mate2TrueCalc);   % Diferen??as entre o mate2 gerado e o calculado (bool)
             mate2MisCalc = mate2Diferences&mate2Calc;
             mate2MissingCalc = xor(mate2Diferences,mate2MisCalc);
             
@@ -670,7 +674,7 @@ classdef matching
                 markCoords(:,2) = round( refConv.cartesianToMatrix(imgDim, str(2).coordinates(:,mate2(i)) ) );
                 markCoords(2,2) = markCoords(2,2) + imgDim(2) + separation;
                 
-                if markStatus % criar circulo à volta do canto
+                if markStatus % criar circulo ?? volta do canto
                     for j=1:16
                         imageConc(markCoords(1,1)+markRefCoords(1,j), markCoords(2,1)+markRefCoords(2,j), :) = [0 0 255];
                         imageConc(markCoords(1,2)+markRefCoords(1,j), markCoords(2,2)+markRefCoords(2,j), :) = [0 0 255];
@@ -694,7 +698,7 @@ classdef matching
             end
         end
         
-        % Correspond�ncia entre
+        % Correspond???ncia entre
         function matchCoords = indexisToCoords(mate2,extractions)
             sizeMate2 = size(mate2);
             
