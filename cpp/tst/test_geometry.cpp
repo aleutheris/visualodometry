@@ -1,7 +1,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 
-#include "Geometry.hpp"
+#include "geometry.hpp"
 
 using namespace ::testing;
 

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Geometry.hpp"
+#include "geometry.hpp"
 
 int main()
 {
