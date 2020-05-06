@@ -12,11 +12,11 @@ classdef cornerSim
                 return;
             end
 
-            coordinates1 = zeros(2, numCorners);          
+            coordinates1 = zeros(2, numCorners);
 
             for i = 1:numCorners
-                x = round(rand(1) * (imgDim(2)-1) - (imgDim(2)-1)/2);
-                y = round(rand(1) * (imgDim(1)-1) - (imgDim(1)-1)/2);
+                x = round(rand(1) * (imgDim(2)-1) - (imgDim(2)-1) / 2);
+                y = round(rand(1) * (imgDim(1)-1) - (imgDim(1)-1) / 2);
 
                 while cornerSim.coordinatesCheck(coordinates1,[x;y]) > 0  %Enquanto x e y estiverem contidos em coordinates1 busca novos valores
                     x = round(rand(1) * (imgDim(2)-1) - (imgDim(2) - 1) / 2);
@@ -121,8 +121,8 @@ classdef cornerSim
                 
         %% devolve a posi????o de coords em coordinates, ou 0 caso n??o exista
         function pos = coordinatesCheck(coordinates,coords)    
-            for i=1:length(coordinates);
-                if coordinates(:,i)==coords
+            for i = 1:length(coordinates)
+                if coordinates(:,i) == coords
                     pos = i;     
                     return;
                 end
