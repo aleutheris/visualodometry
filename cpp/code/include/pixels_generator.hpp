@@ -7,7 +7,7 @@ typedef struct _ImageDimensions
 } ImageDimensions;
 
 
-class PixelsGenerate
+class PixelsGenerator
 {
 public:
   int get_sum(int number1, int number2);

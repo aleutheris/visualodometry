@@ -1,20 +1,20 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "pixels_generate.hpp"
+#include "pixels_generator.hpp"
 
 
 // Within the margin there will not be pixels generated
 const int margin_size = 3;
 
 
-int PixelsGenerate::get_sum(int number1, int number2)
+int PixelsGenerator::get_sum(int number1, int number2)
 {
   return number1 + number2;
 }
 
-int PixelsGenerate::generate_simple(ImageDimensions image_dimensions,
-                                    int number_of_pixels_to_generate)
+int PixelsGenerator::generate_simple(ImageDimensions image_dimensions,
+                                     int number_of_pixels_to_generate)
 {
   int image_generation_x = image_dimensions.x - (margin_size * 2);
   int image_generation_y = image_dimensions.y - (margin_size * 2);
@@ -47,7 +47,7 @@ int PixelsGenerate::generate_simple(ImageDimensions image_dimensions,
 }
 
 
-ImageDimensions PixelsGenerate::generate_pixel(ImageDimensions& pixel, int min_x, int max_x, int min_y, int max_y)
+ImageDimensions PixelsGenerator::generate_pixel(ImageDimensions& pixel, int min_x, int max_x, int min_y, int max_y)
 {
   pixel.x = generante_random_number(min_x, max_x);
   pixel.y = generante_random_number(min_y, max_y);
@@ -55,7 +55,7 @@ ImageDimensions PixelsGenerate::generate_pixel(ImageDimensions& pixel, int min_x
   return pixel;
 }
 
-int PixelsGenerate::find_generated_pixel(std::vector<ImageDimensions> pixels, int pixel_coordinate_x, int pixel_coordinate_y)
+int PixelsGenerator::find_generated_pixel(std::vector<ImageDimensions> pixels, int pixel_coordinate_x, int pixel_coordinate_y)
 {
   int result = 0;
 
@@ -72,7 +72,7 @@ int PixelsGenerate::find_generated_pixel(std::vector<ImageDimensions> pixels, in
 }
 
 // Add this function to common code
-int PixelsGenerate::generante_random_number(int min, int max)
+int PixelsGenerator::generante_random_number(int min, int max)
 {
   srand((unsigned) time(0));
   return (rand() % (max - min + 1)) + min;

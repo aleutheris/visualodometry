@@ -36,5 +36,5 @@ add_executable(test_geometry tst/test_geometry.cpp src/geometry.cpp)
 target_link_libraries(test_geometry ${GTEST_LIBRARIES} pthread)
 #target_link_libraries(testGeometry ${GTEST_LIBRARIES} pthread ${LIB_GEOMETRY}) # in case of lib usage
 
-add_executable(test_pixels_generate tst/test_pixels_generate.cpp src/pixels_generate.cpp)
-target_link_libraries(test_pixels_generate ${GTEST_LIBRARIES} pthread)
+add_executable(test_pixels_generator tst/test_pixels_generator.cpp src/pixels_generator.cpp)
+target_link_libraries(test_pixels_generator ${GTEST_LIBRARIES} pthread)
