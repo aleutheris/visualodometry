@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(vodometry)
 
 # Build type
-set(CMAKE_BUILD_TYPE Release)
+#set(CMAKE_BUILD_TYPE Release)
 
 # Bring the headers into the project
 include_directories(include)
