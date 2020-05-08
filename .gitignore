@@ -12,5 +12,6 @@
 **/input parameter.xlsx
 
 build/
+build_eclipse/
 */*/.project
 */*/*/*/*/*.cpp.o

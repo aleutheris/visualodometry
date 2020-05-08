@@ -21,12 +21,16 @@ link_directories(build)
 
 # Generate the executables
 add_executable(vodometry src/mainapp.cpp
+                         src/generator.cpp
                          src/geometry.cpp)
 #target_link_libraries(vodometry ${LIB_GEOMETRY} ${LIB_BASIC}) # in case of lib usage
 
 # Testing
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
+
+add_executable(test_generator tst/test_generator.cpp src/generator.cpp)
+target_link_libraries(test_generator ${GTEST_LIBRARIES} pthread)
 
 add_executable(test_geometry tst/test_geometry.cpp src/geometry.cpp)
 target_link_libraries(test_geometry ${GTEST_LIBRARIES} pthread)
