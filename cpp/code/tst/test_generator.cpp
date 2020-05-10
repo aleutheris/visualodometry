@@ -10,6 +10,7 @@ using namespace ::testing;
 class TestPixelsGenerate : public Test
 {
 public:
+  void test_range(Generator& gen, const int begin_test_number, const int end_test_number);
 
 private:
   virtual void SetUp()
@@ -20,6 +21,27 @@ private:
   {
   }
 };
+
+
+TEST_F(TestPixelsGenerate, test_generator_constructor)
+{
+  const int begin_test_number = 0;
+  const int end_test_number = 200;
+  Generator gen(begin_test_number, end_test_number);
+
+  test_range(gen, begin_test_number, end_test_number);
+}
+
+TEST_F(TestPixelsGenerate, test_add_range)
+{
+  const int begin_test_number = 0;
+  const int end_test_number = 200;
+  Generator gen;
+
+  gen.add_range(begin_test_number, end_test_number);
+
+  test_range(gen, begin_test_number, end_test_number);
+}
 
 TEST_F(TestPixelsGenerate, test_get_number)
 {
@@ -63,10 +85,38 @@ TEST_F(TestPixelsGenerate, test_get_number)
   }
 }
 
+void TestPixelsGenerate::test_range(Generator& gen, const int begin_test_number, const int end_test_number)
+{
+  const int number_of_attempts = 10000;
+  int generated_number = 0;
+  int count_begin_test_number = 0;
+  int count_end_test_number = 0;
+
+  for(int a = 0; a < number_of_attempts; a++)
+  {
+    generated_number = gen.get_number();
+
+    if(generated_number == begin_test_number)
+    {
+      count_begin_test_number++;
+    }
+    else if(generated_number == end_test_number)
+    {
+      count_end_test_number++;
+    }
+    else
+    {
+      ASSERT_GT(generated_number, begin_test_number);
+      ASSERT_LT(generated_number, end_test_number);
+    }
+  }
+
+  ASSERT_GT(count_begin_test_number, 0);
+  ASSERT_GT(count_end_test_number, 0);
+}
 
 int main(int argc, char** argv)
 {
   InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
-
