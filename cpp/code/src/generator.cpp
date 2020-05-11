@@ -15,10 +15,11 @@ Generator::~Generator()
 {
 }
 
-void Generator::add_range(int min, int max)
+int Generator::add_range(int min, int max)
 {
   this->_min = min;
   this->_max = max;
+  return (rand() % (_max - _min + 1)) + _min;
 }
 
 int Generator::get_number()
