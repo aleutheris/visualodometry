@@ -2,7 +2,7 @@
 #include <ctime>
 
 #include "pixels_generator.hpp"
-#include "generator.hpp"
+#include "generator.h"
 
 
 // Within the margin there will not be pixels generated

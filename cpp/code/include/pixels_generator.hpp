@@ -1,3 +1,6 @@
+#ifndef __pixels_generator_h__
+#define __pixels_generator_h__
+
 #include <vector>
 
 typedef struct _ImageDimensions
@@ -18,3 +21,5 @@ public:
 private:
   std::vector<ImageDimensions> _pixels_generated_simple;
 };
+
+#endif

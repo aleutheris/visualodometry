@@ -1,3 +1,6 @@
+#ifndef __generator_h__
+#define __generator_h__
+
 
 class Generator
 {
@@ -12,3 +15,5 @@ private:
   int _min = 0;
   int _max = 0;
 };
+
+#endif
