@@ -1,5 +1,5 @@
-#ifndef __basic_h__
-#define __basic_h__
+#ifndef __generator_cbridge_h__
+#define __generator_cbridge_h__
 
 
 #ifdef __cplusplus

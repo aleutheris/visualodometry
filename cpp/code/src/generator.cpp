@@ -1,5 +1,5 @@
-#include <generator.h>
 #include <iostream>
+#include <generator.h>
 
 
 Generator::Generator(int min, int max) : _min(min), _max(max)

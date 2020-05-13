@@ -7,4 +7,4 @@ end
 
 calllib('libgenerator_cbridge', 'Generator_get_sum', 1, 2)
 
-calllib('libgenerator_cbridge', 'Generator_get_number', 1, 2)
+%calllib('libgenerator_cbridge', 'Generator_get_number', 1, 2)
