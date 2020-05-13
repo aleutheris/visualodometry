@@ -11,6 +11,9 @@ public:
   int add_range(int min, int max);
   int get_number();
 
+  //TODO: remove
+  int get_sum(int min, int max);
+
 private:
   int _min = 0;
   int _max = 0;

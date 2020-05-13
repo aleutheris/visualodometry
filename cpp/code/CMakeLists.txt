@@ -11,9 +11,8 @@ include_directories(include)
 ##### Libraries #####
 # Generate the shared library from the sources
 add_library(geometry SHARED src/geometry.cpp)
-add_library(basic SHARED src/basic.c)
+add_library(generator_cbridge SHARED src/generator_cbridge.cpp src/generator.cpp)
 #set(LIB_GEOMETRY libgeometry.so) # in case of lib usage
-#set(LIB_BASIC libbasic.so) # in case of lib usage
 
 # Folder where libraies are placed
 link_directories(build)
@@ -24,6 +23,7 @@ add_executable(vodometry src/mainapp.cpp
                          src/generator.cpp
                          src/geometry.cpp)
 #target_link_libraries(vodometry ${LIB_GEOMETRY} ${LIB_BASIC}) # in case of lib usage
+
 
 # Testing
 find_package(GTest REQUIRED)

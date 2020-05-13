@@ -2,6 +2,7 @@
 
 #include "geometry.hpp"
 
+
 int main()
 {
   Geometry g;
