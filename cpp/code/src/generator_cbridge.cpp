@@ -1,7 +1,7 @@
 #include <cstdlib>
 
-#include <generator.h>
-#include <generator_cbridge.h>
+#include "generator.hpp"
+#include "generator_cbridge.h"
 
 
 #ifdef __cplusplus

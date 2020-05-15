@@ -1,15 +1,17 @@
 #include <iostream>
 
-#include "geometry.hpp"
+//#include "generator_cbridge.h"
+#include "pixels_generator_cbridge.h"
 
 
 int main()
 {
-  Geometry g;
-  int number1 = 1;
-  int number2 = 2;
+  int num1 = 2;
+  int num2 = 4;
+  //int sum = Generator_get_sum(num1, num2);
+  int sum = pixelsgenerator_get_sum(num1, num2);
 
-  std::cout << "The sum of " << number1 << " + " << number2 << " is equal to " << g.get_sum(number1,number2) << std::endl;
+  std::cout << sum << std::endl;
 
   return 0;
 }

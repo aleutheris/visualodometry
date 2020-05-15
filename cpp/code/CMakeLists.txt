@@ -12,6 +12,10 @@ include_directories(include)
 # Generate the shared library from the sources
 add_library(geometry SHARED src/geometry.cpp)
 add_library(generator_cbridge SHARED src/generator_cbridge.cpp src/generator.cpp)
+add_library(pixels_generator_cbridge SHARED src/pixels_generator_cbridge.cpp
+                                            src/pixels_generator.cpp
+                                            src/generator.cpp
+                                            src/cbridge.c)
 #set(LIB_GEOMETRY libgeometry.so) # in case of lib usage
 
 # Folder where libraies are placed
@@ -20,8 +24,10 @@ link_directories(build)
 
 # Generate the executables
 add_executable(vodometry src/mainapp.cpp
+                         src/pixels_generator_cbridge.cpp
+                         src/pixels_generator.cpp
                          src/generator.cpp
-                         src/geometry.cpp)
+                         src/cbridge.c)
 #target_link_libraries(vodometry ${LIB_GEOMETRY} ${LIB_BASIC}) # in case of lib usage
 
 

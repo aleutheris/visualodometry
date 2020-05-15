@@ -1,13 +1,14 @@
-#include <cstdlib>
-#include <ctime>
-
+#include "generator.hpp"
 #include "pixels_generator.hpp"
-#include "generator.h"
 
 
 // Within the margin there will not be pixels generated
 const int margin_size = 3;
 
+
+PixelsGenerator::PixelsGenerator(){}
+
+PixelsGenerator::~PixelsGenerator(){}
 
 std::vector<ImageDimensions> PixelsGenerator::generate_simple(ImageDimensions image_dimensions,
                                                               int number_of_pixels_to_generate)
@@ -55,4 +56,11 @@ int PixelsGenerator::find_generated_pixel(std::vector<ImageDimensions> pixels, i
   }
 
   return result;
+}
+
+
+//TODO: REMOVE
+int PixelsGenerator::get_sum(int min, int max)
+{
+  return min+max;
 }

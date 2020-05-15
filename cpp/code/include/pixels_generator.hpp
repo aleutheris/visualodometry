@@ -13,10 +13,14 @@ typedef struct _ImageDimensions
 class PixelsGenerator
 {
 public:
-  int get_sum(int number1, int number2);
+  PixelsGenerator();
+  ~PixelsGenerator();
   std::vector<ImageDimensions> generate_simple(ImageDimensions image_dimensions, int number_of_pixels);
 
   int find_generated_pixel(std::vector<ImageDimensions> pixels, int pixel_coordinate_x, int pixel_coordinate_y);
+
+  //TODO: remove
+  int get_sum(int min, int max);
 
 private:
   std::vector<ImageDimensions> _pixels_generated_simple;

@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <gtest/gtest.h>
 
-#include "generator.h"
+#include "generator.hpp"
 
 using namespace ::testing;
 
