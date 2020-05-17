@@ -23,22 +23,30 @@ std::vector<ImageDimensions> PixelsGenerator::generate_simple(ImageDimensions im
   Generator generator_x;
   Generator generator_y;
 
-  /* Makes sure that the number of pixels to generate is not higher *
-   * than the number of the image available pixels                  */
-  if(number_of_pixels_to_generate < image_generation_x * image_generation_y)
+  if(number_of_pixels_to_generate > 0 && image_generation_x >=0 && image_generation_y >=0)
   {
-    for(int i = 0; i < number_of_pixels_to_generate; i++)
+    /* Makes sure that the number of pixels to generate is not higher *
+     * than the number of the image available pixels                  */
+    if(number_of_pixels_to_generate < image_generation_x * image_generation_y)
     {
-      do
+      for(int i = 0; i < number_of_pixels_to_generate; i++)
       {
-        pixel_aux.x = generator_x.add_range(image_generation_min_x, image_generation_max_x);
-        pixel_aux.y = generator_y.add_range(image_generation_min_y, image_generation_max_y);
-      } while(find_generated_pixel(this->_pixels_generated_simple, pixel_aux.x, pixel_aux.y) > 0);
+        do
+        {
+          pixel_aux.x = generator_x.add_range(image_generation_min_x, image_generation_max_x);
+          pixel_aux.y = generator_y.add_range(image_generation_min_y, image_generation_max_y);
+        } while(find_generated_pixel(this->_pixels_generated_simple, pixel_aux.x, pixel_aux.y) > 0);
 
-      this->_pixels_generated_simple.push_back(pixel_aux);
+        this->_pixels_generated_simple.push_back(pixel_aux);
+      }
     }
   }
 
+  return this->_pixels_generated_simple;
+}
+
+std::vector<ImageDimensions> PixelsGenerator::get_pixels_generated_simple()
+{
   return this->_pixels_generated_simple;
 }
 
@@ -58,6 +66,15 @@ int PixelsGenerator::find_generated_pixel(std::vector<ImageDimensions> pixels, i
   return result;
 }
 
+bool operator==(const ImageDimensions& imagedimensions1, const ImageDimensions& imagedimensions2)
+{
+  bool result = true;
+
+  result &= imagedimensions1.x == imagedimensions2.x;
+  result &= imagedimensions1.y == imagedimensions2.y;
+
+  return result;
+}
 
 //TODO: REMOVE
 int PixelsGenerator::get_sum(int min, int max)

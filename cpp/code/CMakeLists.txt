@@ -16,7 +16,7 @@ add_library(pixels_generator_cbridge SHARED src/pixels_generator_cbridge.cpp
                                             src/pixels_generator.cpp
                                             src/generator.cpp
                                             src/cbridge.c)
-#set(LIB_GEOMETRY libgeometry.so) # in case of lib usage
+#set(LIB_GEOMETRY libgeometry.so) # in case of lib usage (alias)
 
 # Folder where libraies are placed
 link_directories(build)
@@ -42,5 +42,14 @@ add_executable(test_geometry tst/test_geometry.cpp src/geometry.cpp)
 target_link_libraries(test_geometry ${GTEST_LIBRARIES} pthread)
 #target_link_libraries(testGeometry ${GTEST_LIBRARIES} pthread ${LIB_GEOMETRY}) # in case of lib usage
 
-add_executable(test_pixels_generator tst/test_pixels_generator.cpp src/generator.cpp src/pixels_generator.cpp)
+add_executable(test_pixels_generator tst/test_pixels_generator.cpp 
+                                     src/generator.cpp 
+                                     src/pixels_generator.cpp)
 target_link_libraries(test_pixels_generator ${GTEST_LIBRARIES} pthread)
+
+add_executable(test_pixels_generator_cbridge tst/test_pixels_generator_cbridge.cpp 
+                                             src/pixels_generator_cbridge.cpp
+                                             src/pixels_generator.cpp
+                                             src/generator.cpp
+                                             src/cbridge.c)
+target_link_libraries(test_pixels_generator_cbridge ${GTEST_LIBRARIES} pthread)

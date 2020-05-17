@@ -8,16 +8,16 @@
 extern "C" {
 #endif
 
-static Generator* Generator_instance = NULL;
+static Generator generator;
 
 int Generator_get_number(int min, int max)
 {
-  return Generator_instance->add_range(min, max);
+  return generator.add_range(min, max);
 }
 
 int Generator_get_sum(int min, int max)
 {
-  return Generator_instance->get_sum(min, max);
+  return generator.get_sum(min, max);
 }
 
 #ifdef __cplusplus
