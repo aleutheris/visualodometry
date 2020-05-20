@@ -6,9 +6,9 @@
 extern "C" {
 #endif
 
-int Generator_get_number(int min, int max);
+int generator_get_number(int min, int max);
 
-int Generator_get_sum(int min, int max);
+int generator_get_sum(int min, int max);
 
 #ifdef __cplusplus
 }

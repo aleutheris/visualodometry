@@ -105,7 +105,7 @@ TEST_F(TestPixelsGenerator, test_generate_simple_size_good_weather)
   ASSERT_EQ(pixels_local.size(), number_of_pixels_to_generate);
 }
 
-TEST_F(TestPixelsGenerator, test_generate_simple__size_bad_weather)
+TEST_F(TestPixelsGenerator, test_generate_simple_size_bad_weather)
 {
   std::vector<ImageDimensions> pixels;
   ImageDimensions image_dimensions;
@@ -141,7 +141,7 @@ TEST_F(TestPixelsGenerator, test_generate_simple__size_bad_weather)
   pixels.clear();
 }
 
-TEST_F(TestPixelsGenerator, test_generate_simple_valid)
+TEST_F(TestPixelsGenerator, test_generate_simple_valid_range)
 {
   PixelsGenerator pixelsgenerator;
   std::vector<ImageDimensions> pixels;
@@ -159,6 +159,33 @@ TEST_F(TestPixelsGenerator, test_generate_simple_valid)
     ASSERT_GE((*it).y, 0);
     ASSERT_LT((*it).x, image_dimensions.x);
     ASSERT_LT((*it).y, image_dimensions.y);
+  }
+}
+
+TEST_F(TestPixelsGenerator, test_generate_simple_coordinates_diversity)
+{
+  PixelsGenerator pixelsgenerator;
+  std::vector<ImageDimensions> pixels;
+  ImageDimensions image_dimensions;
+  int number_of_pixels_to_generate = 10;
+  int same_pixel_count = 0;
+
+  image_dimensions.x = 40;
+  image_dimensions.y = 30;
+
+  pixels = pixelsgenerator.generate_simple(image_dimensions, number_of_pixels_to_generate);
+
+  for(std::vector<ImageDimensions>::iterator it1 = pixels.begin(); it1 != pixels.end(); it1++)
+  {
+    for(std::vector<ImageDimensions>::iterator it2 = pixels.begin(); it2 != pixels.end(); it2++)
+    {
+      if(*it1 == *it2)
+      {
+        same_pixel_count++;
+        ASSERT_EQ(same_pixel_count, 1);
+      }
+    }
+    same_pixel_count = 0;
   }
 }
 

@@ -22,11 +22,12 @@ private:
 
 TEST_F(TestPixelsGeneratorCBridge, test_generate_simple)
 {
-  int** generated_pixels;
   int number_of_pixels_to_generate = 10;
+  int generated_pixels[2][number_of_pixels_to_generate] = {{0}};
   int image_dimensions_array[] = {40, 30};
+  int* generated_pixels_ptr = &generated_pixels[0][0];
 
-  generated_pixels = pixelsgenerator_generate_simple(image_dimensions_array, number_of_pixels_to_generate);
+  pixelsgenerator_generate_simple(image_dimensions_array, number_of_pixels_to_generate, generated_pixels_ptr);
 
   for(int i = 0; i < number_of_pixels_to_generate; i++)
   {

@@ -8,15 +8,15 @@
 extern "C" {
 #endif
 
-static Generator generator;
-
-int Generator_get_number(int min, int max)
+int generator_get_number(int min, int max)
 {
+  Generator generator;
   return generator.add_range(min, max);
 }
 
-int Generator_get_sum(int min, int max)
+int generator_get_sum(int min, int max)
 {
+  Generator generator;
   return generator.get_sum(min, max);
 }
 

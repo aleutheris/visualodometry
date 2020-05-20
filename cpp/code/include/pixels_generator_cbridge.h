@@ -6,10 +6,9 @@
 extern "C" {
 #endif
 
-int** pixelsgenerator_generate_simple(int* image_dimensions_array,
-                                      int number_of_pixels_to_generate);
-
-int pixelsgenerator_get_sum(int min, int max);
+void pixelsgenerator_generate_simple(int* image_dimensions_array,
+                                     int number_of_pixels_to_generate,
+                                     int* pixels_coordinates);
 
 #ifdef __cplusplus
 }

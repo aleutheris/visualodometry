@@ -14,8 +14,7 @@ add_library(geometry SHARED src/geometry.cpp)
 add_library(generator_cbridge SHARED src/generator_cbridge.cpp src/generator.cpp)
 add_library(pixels_generator_cbridge SHARED src/pixels_generator_cbridge.cpp
                                             src/pixels_generator.cpp
-                                            src/generator.cpp
-                                            src/cbridge.c)
+                                            src/generator.cpp)
 #set(LIB_GEOMETRY libgeometry.so) # in case of lib usage (alias)
 
 # Folder where libraies are placed
@@ -26,8 +25,7 @@ link_directories(build)
 add_executable(vodometry src/mainapp.cpp
                          src/pixels_generator_cbridge.cpp
                          src/pixels_generator.cpp
-                         src/generator.cpp
-                         src/cbridge.c)
+                         src/generator.cpp)
 #target_link_libraries(vodometry ${LIB_GEOMETRY} ${LIB_BASIC}) # in case of lib usage
 
 
@@ -50,6 +48,5 @@ target_link_libraries(test_pixels_generator ${GTEST_LIBRARIES} pthread)
 add_executable(test_pixels_generator_cbridge tst/test_pixels_generator_cbridge.cpp 
                                              src/pixels_generator_cbridge.cpp
                                              src/pixels_generator.cpp
-                                             src/generator.cpp
-                                             src/cbridge.c)
+                                             src/generator.cpp)
 target_link_libraries(test_pixels_generator_cbridge ${GTEST_LIBRARIES} pthread)

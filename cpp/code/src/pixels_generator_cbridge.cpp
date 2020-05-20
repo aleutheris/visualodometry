@@ -8,40 +8,33 @@
 extern "C" {
 #endif
 
-#include "cbridge.h"
 
-//TODO: create a create and destroy methods
-static PixelsGenerator pixelsgenerator;
-
-int** pixelsgenerator_generate_simple(int* image_dimensions_array,
-                                      int number_of_pixels_to_generate)
+void pixelsgenerator_generate_simple(int* image_dimensions_array,
+                                     int number_of_pixels_to_generate,
+                                     int* pixels_coordinates)
 {
+  PixelsGenerator pixelsgenerator;
   std::vector<ImageDimensions> pixels_coordinates_cpp;
   ImageDimensions image_dimensions_struct;
+  int* pixels_coordinates_x = pixels_coordinates;
+  int* pixels_coordinates_y = pixels_coordinates + number_of_pixels_to_generate;
 
-  image_dimensions_struct.x = image_dimensions_array[x_index];
-  image_dimensions_struct.y = image_dimensions_array[y_index];
+
+  image_dimensions_struct.x = image_dimensions_array[image_x_index];
+  image_dimensions_struct.y = image_dimensions_array[image_y_index];
 
   pixels_coordinates_cpp = pixelsgenerator.generate_simple(image_dimensions_struct, number_of_pixels_to_generate);
 
-  const int size = pixels_coordinates_cpp.size();
-  int** pixels_coordinates_c = create_multi_array(number_of_dimensions, size);
-
-  int i = 0;
   for(std::vector<ImageDimensions>::iterator it = pixels_coordinates_cpp.begin(); it != pixels_coordinates_cpp.end(); it++)
   {
-    pixels_coordinates_c[x_index][i] = (*it).x;
-    pixels_coordinates_c[y_index][i] = (*it).y;
-    i++;
+    *pixels_coordinates_x = (*it).x;
+    *pixels_coordinates_y = (*it).y;
+
+    pixels_coordinates_x++;
+    pixels_coordinates_y++;
   }
-
-  return pixels_coordinates_c;
 }
 
-int pixelsgenerator_get_sum(int min, int max)
-{
-  return pixelsgenerator.get_sum(min, max);
-}
 
 #ifdef __cplusplus
 }

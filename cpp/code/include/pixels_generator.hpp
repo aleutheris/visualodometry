@@ -12,8 +12,8 @@ typedef struct _ImageDimensions
 bool operator==(const ImageDimensions& imagedimensions1, const ImageDimensions& imagedimensions2);
 
 
-const int x_index = 0;
-const int y_index = 1;
+const int image_x_index = 0;
+const int image_y_index = 1;
 const int number_of_dimensions = 2;
 
 
