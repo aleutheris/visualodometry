@@ -10,6 +10,8 @@ void pixelsgenerator_generate_simple(int* image_dimensions_array,
                                      int number_of_pixels_to_generate,
                                      int* pixels_coordinates);
 
+int pixelsgenerator_get_sum(int min, int max);
+
 #ifdef __cplusplus
 }
 #endif

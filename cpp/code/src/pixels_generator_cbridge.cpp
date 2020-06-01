@@ -35,6 +35,12 @@ void pixelsgenerator_generate_simple(int* image_dimensions_array,
   }
 }
 
+//TODO: remove
+int pixelsgenerator_get_sum(int min, int max)
+{
+  PixelsGenerator pixelsgenerator;
+  return pixelsgenerator.get_sum(min, max);
+}
 
 #ifdef __cplusplus
 }

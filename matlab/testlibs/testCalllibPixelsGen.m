@@ -10,7 +10,7 @@ end
 
 [~, gen] = calllib('libpixels_generator_cbridge', 'pixelsgenerator_generate_simple', [30 50], number_of_pixels_to_generate, array_cenas);
 
-%sum = calllib('libpixels_generator_cbridge', 'pixelsgenerator_get_sum', 1, 3, zeros(3));
+sum = calllib('libpixels_generator_cbridge', 'pixelsgenerator_get_sum', 1, 3);
 
 %get(p)
 
@@ -19,3 +19,4 @@ end
 unloadlibrary libpixels_generator_cbridge
 
 gen
+sum
