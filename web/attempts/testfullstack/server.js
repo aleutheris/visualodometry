@@ -2,8 +2,12 @@ var express = require('express');
 var app = express();
 var fs = require("fs");
 
+/**/
+var math = require('./math')
+var result = null;
 
-//const cors = require('cors')({origin: true});
+const cors = require('cors')({origin: true});
+/**/
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -11,11 +15,17 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 app.get('/listUsers', function (req, res) {
    fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
-      console.log( data );
-      res.end( data );
+      //console.log( data );
+      //res.end( data );
+  
+   /**/
+   result = math.add(7, 2);
+   //console.log('5+2='+result);
+   //console.log( '5+2='+result );
+   res.end( '7+2='+result );
+   /**/
    });
 })
 
