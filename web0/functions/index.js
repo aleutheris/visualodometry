@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
 
 // [START import]
 const functions = require('firebase-functions');
@@ -59,6 +58,7 @@ app.get('/', (req, res) => {
 
 // [START api]
 // This endpoint is the BONG API. It returns the bongs as an API.
+/*
 app.get('/api', (req, res) => {
   const date = new Date();
   const hours = (date.getHours() % 12) + 1; // London is UTC + 1hr;
@@ -77,7 +77,7 @@ function secondsLeftBeforeEndOfHour(date) {
   const m = date.getMinutes();
   const s = date.getSeconds();
   return 3600 - (m*60) - s;
-}
+}*/
 // [END seconds_left]
 
 // [START export]
@@ -85,7 +85,7 @@ function secondsLeftBeforeEndOfHour(date) {
 exports.app = functions.https.onRequest(app);
 // [END export]
 
-
+/*
 exports.helloWorld = functions.https.onRequest((request, response) => {
  response.send("Hello from Firebase!");
 });
@@ -93,3 +93,4 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 exports.test = functions.https.onRequest((request, response) => {
  response.send("This something different");
 });
+*/
