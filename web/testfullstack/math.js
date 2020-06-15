@@ -8,7 +8,7 @@ var mathlib = null;
 if (platform === 'win32'){
     mathlib = './build/Release/math.dll';
 }else if(platform === 'linux'){
-    mathlib = './build/Release/math.so';
+    mathlib = './math.so';
 }else if(platform === 'darwin'){
     mathlib = './build/Release/math.dylib'
 }else{
