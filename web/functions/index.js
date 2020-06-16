@@ -1,40 +1,12 @@
-/**
- * Copyright 2017 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-// [START import]
 const functions = require('firebase-functions');
 const express = require('express');
-const app = express();
-const test = express();
-// [END import]
+const shell = require('shelljs');
 
-// [START middleware]
+const app = express();
 const cors = require('cors')({origin: true});
 app.use(cors);
-test.use(cors);
-// [END middleware]
-/*
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});*/
 
-// [START index]
-// This endpoint provides displays the index page.
+
 app.get('/', (req, res) => {
   const date = new Date();
   const hours = (date.getHours() % 12) + 1; // London is UTC + 1hr;
@@ -54,10 +26,6 @@ app.get('/', (req, res) => {
     </body>
   </html>`);
 });
-// [END index]
-
-// [START api]
-// This endpoint is the BONG API. It returns the bongs as an API.
 
 app.get('/api', (req, res) => {
   const date = new Date();
@@ -69,28 +37,23 @@ app.get('/api', (req, res) => {
   // [END_EXCLUDE silent]
   res.json({bongs: 'BONG '.repeat(hours)});
 });
-// [END api]
 
-// [START seconds_left]
-// Returns the number of seconds left before the next hour starts.
 function secondsLeftBeforeEndOfHour(date) {
   const m = date.getMinutes();
   const s = date.getSeconds();
   return 3600 - (m*60) - s;
 }
-// [END seconds_left]
 
-// [START export]
-// Export the express app as an HTTP Cloud Function
 exports.app = functions.https.onRequest(app);
-// [END export]
 
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!");
-});
+  //response.send("Hello from Firebase!");
+  
+  var myvar = shell.exec('./hw');
 
-exports.test = functions.https.onRequest((request, response) => {
- response.send("This something different");
-});
+  myvar;
+response.send(myvar);
 
+  console.log(myvar);
+});
