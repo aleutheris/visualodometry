@@ -45,7 +45,7 @@ function secondsLeftBeforeEndOfHour(date) {
 }
 
 app.get('/id1=:id1&id2=:id2', function (req, res) {
-  var myvar = shell.exec('./vodometry ' + req.params.id1 + ' ' + req.params.id2);
+  var myvar = shell.exec('./lib/vodometry ' + req.params.id1 + ' ' + req.params.id2);
   res.send(myvar);
 })
 
@@ -54,6 +54,6 @@ exports.app = functions.https.onRequest(app);
 
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
-  var myvar = shell.exec('./vodometry cenas maradas bla ble');
+  var myvar = shell.exec('./lib/vodometry cenas maradas bla ble');
   response.send(myvar);
 });
