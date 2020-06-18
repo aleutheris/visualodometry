@@ -10,6 +10,7 @@ include_directories(include)
 
 ##### Libraries #####
 # Generate the shared library from the sources
+add_library(json_bridge SHARED src/json_bridge.cpp)
 add_library(geometry SHARED src/geometry.cpp)
 add_library(generator_cbridge SHARED src/generator_cbridge.cpp src/generator.cpp)
 add_library(pixels_generator_cbridge SHARED src/pixels_generator_cbridge.cpp
@@ -25,7 +26,8 @@ link_directories(build)
 add_executable(vodometry src/mainapp.cpp
                          src/pixels_generator_cbridge.cpp
                          src/pixels_generator.cpp
-                         src/generator.cpp)
+                         src/generator.cpp
+                         src/json_bridge.cpp)
 #target_link_libraries(vodometry ${LIB_GEOMETRY} ${LIB_BASIC}) # in case of lib usage
 
 

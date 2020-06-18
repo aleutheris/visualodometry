@@ -2,7 +2,7 @@
 #include <ctime>
 #include <iostream>
 
-#include <generator.hpp>
+#include "generator.hpp"
 
 
 Generator::Generator(int min, int max) : _min(min), _max(max)
