@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 
     j = jb.to_json(pixels_local);
 
-    std::cout << j.dump(2) << std::endl;
+    std::cout << j.dump() << std::endl;
 
     error = 0;
   }
