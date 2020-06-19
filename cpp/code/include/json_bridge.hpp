@@ -14,6 +14,7 @@ public:
   ~JsonBridge();
 
   json to_json(ImageDimensions imagedimensions);
+  json to_json(std::vector<ImageDimensions> imagepixels);
 };
 
 #endif

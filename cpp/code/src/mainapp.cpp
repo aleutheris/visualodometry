@@ -5,42 +5,31 @@
 
 
 int main(int argc, char *argv[])
-{/*
-  // instead, you could also write (which looks very similar to the JSON above)
-  json j;
+{
+  int error = 0;
 
-  // add a number that is stored as double (note the implicit conversion of j to an object)
-  j["pi"] = 3.141;
+  if(argc == 4)
+  {
+    json j;
+    JsonBridge jb;
+    PixelsGenerator pixelsgenerator;
+    ImageDimensions image_dimensions;
+    image_dimensions.x = atoi(argv[1]);
+    image_dimensions.y = atoi(argv[2]);
+    int number_of_pixels_to_generate = atoi(argv[3]);
 
-  // add a Boolean that is stored as bool
-  j["happy"] = true;
+    std::vector<ImageDimensions> pixels_local = pixelsgenerator.generate_simple(image_dimensions, number_of_pixels_to_generate);
 
-  // add a string that is stored as std::string
-  j["name"] = "Niels";
+    j = jb.to_json(pixels_local);
 
-  // add another null object by passing nullptr
-  j["nothing"] = nullptr;
+    std::cout << j.dump(2) << std::endl;
 
-  // add an object inside the object
-  j["answer"]["everything"] = 42;
+    error = 0;
+  }
+  else
+  {
+    error = 1;
+  }
 
-  // add an array that is stored as std::vector (using an initializer list)
-  j["list"] = { 1, 0, 2 };
-
-  // add another object (using an initializer list of pairs)
-  j["object"] = { {"currency", "USD"}, {"value", 42.99} };
-
-  std::cout << j.dump() << std::endl;*/
-
-
-  ImageDimensions id;
-  id.x = 4;
-  id.y = 5;
-
-  JsonBridge jb;
-  json j = jb.to_json(id);
-
-  std::cout << j.dump() << std::endl;
-
-  return 0;
+  return error;
 }

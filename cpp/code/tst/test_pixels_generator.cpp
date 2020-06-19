@@ -93,7 +93,7 @@ TEST_F(TestPixelsGenerator, test_generate_simple_size_good_weather)
   std::vector<ImageDimensions> pixels_local;
   std::vector<ImageDimensions> pixels_object;
   ImageDimensions image_dimensions;
-  int number_of_pixels_to_generate = 10;
+  const int number_of_pixels_to_generate = 10;
 
   image_dimensions.x = 40;
   image_dimensions.y = 30;
