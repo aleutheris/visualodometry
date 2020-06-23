@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="githubViewer">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to Firebase Hosting</title>
 
@@ -30,7 +32,7 @@
       }
     </style>
   </head>
-<body>
+<body ng-controller="MainController">
 	<div id="message">
 		<h2>Welcome</h2>
 		<h1>Firebase Hosting Setup Complete</h1>
@@ -64,6 +66,15 @@
       });
     </script>
 	<div id="bongs"></div>
+	<div><!-- 
+		<p>
+			Name: <input type="text" ng-model="name">
+		</p>
+		<p>You wrote: {{ name }}</p>-->
+		<div>
+			<h1>{{message}}</h1>
+		</div>
+	</div>
 	<script src="script.js"></script>
 </body>
 </html>
