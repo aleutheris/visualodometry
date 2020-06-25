@@ -1,42 +1,61 @@
 (function() {
-	var app = angular.module("githubViewer", [])
+	var app = angular.module("voViewer", [])
+	var svgContainer = {};
+	var pixelSize = 1;
+	var image = {};
+	image.x = 400;
+	image.y = 400;
+	var numberOfPixels = 200;
 
-	var MainController = function($scope, $http) {
-		
-		var promise = $http.get("http://localhost:5001/vodometry/us-central1/app/x=30&y=40&numberpixels=10");
-		
-		promise.then(function(response){
-			$scope.message = response.data;
-		});
+
+	var createPictureBackgroud = function(svgContainer, image) {
+		var mainRectangle = svgContainer.append("rect")
+			.attr("x", 0)
+			.attr("y", 0)
+			.attr("width", image.x)
+			.attr("height", image.y)
+			.attr("fill", "black");
 	}
 
-	var CirclesController = function($scope) {
-		var spaceCircles = [30, 70, 110];
+	var createPixel = function(svgContainer, x, y, length, color) {
+		var rectangle = svgContainer.append("rect")
+			.attr("x", x)
+			.attr("y", y)
+			.attr("width", length)
+			.attr("height", length)
+			.attr("fill", color);
+	}
 
-		var svgContainer = d3.select("body").append("svg")
-			.attr("width", 200)
-			.attr("height", 200);
+	var PictureController = function($scope, $http) {
+		$scope.image = image;
+		$scope.numberOfPixels = numberOfPixels;
 
-		var circles = svgContainer.selectAll("circle")
-			.data(spaceCircles)
-			.enter()
-			.append("circle");
+		$scope.generate = function() {
+			image.x = $scope.image.x;
+			image.y = $scope.image.y;
+			numberOfPixels = $scope.numberOfPixels;
 
-		var circleAttributes = circles
-			.attr("cx", function(d) { return d; })
-			.attr("cy", function(d) { return d; })
-			.attr("r", 20)
-			.style("fill", function(d) {
-				var returnColor;
-				if (d === 30) {
-					returnColor = "green";
-				} else if (d === 70) {
-					returnColor = "purple";
-				} else if (d === 110) { returnColor = "red"; }
-				return returnColor;
+			//var promise = $http.get("http://localhost:5001/vodometry/us-central1/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
+			var promise = $http.get("https://us-central1-vodometry.cloudfunctions.net/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
+
+			promise.then(function(response) {
+				var imageData = response.data;
+
+				d3.select("svg").remove();
+
+				svgContainer = d3.select("body").append("svg")
+					.attr("width", image.x)
+					.attr("height", image.y);
+
+				createPictureBackgroud(svgContainer, image);
+
+				for (var i = 0; i < numberOfPixels; i++) {
+					createPixel(svgContainer, imageData["pixels"][i].x, imageData["pixels"][i].y, pixelSize, "white");
+				}
 			});
+
+		};
 	}
 
-	app.controller("MainController", MainController);
-	app.controller("CirclesController", CirclesController);
+	app.controller("PictureController", PictureController);
 }());
