@@ -6,10 +6,12 @@
 	image.x = 400;
 	image.y = 400;
 	var numberOfPixels = 200;
+	var pixelsColor = "white";
 
 
-	var createPictureBackgroud = function(svgContainer, image) {
-		var mainRectangle = svgContainer.append("rect")
+	var createPictureBackgroud = function(image) {
+		svgContainer
+			.append("rect")
 			.attr("x", 0)
 			.attr("y", 0)
 			.attr("width", image.x)
@@ -17,7 +19,7 @@
 			.attr("fill", "black");
 	}
 
-	var createPixel = function(svgContainer, x, y, length, color) {
+	var createPixel = function(x, y, length, color) {
 		var rectangle = svgContainer.append("rect")
 			.attr("x", x)
 			.attr("y", y)
@@ -35,27 +37,49 @@
 			image.y = $scope.image.y;
 			numberOfPixels = $scope.numberOfPixels;
 
-			//var promise = $http.get("http://localhost:5001/vodometry/us-central1/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
-			var promise = $http.get("https://us-central1-vodometry.cloudfunctions.net/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
+			var promise = $http.get("http://localhost:5001/vodometry/us-central1/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
+			//var promise = $http.get("https://us-central1-vodometry.cloudfunctions.net/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
 
 			promise.then(function(response) {
 				var imageData = response.data;
 
 				d3.select("svg").remove();
+				/*
+				svgContainer = d3.create("svg")
+      				.attr("viewBox", [0, 0, image.x, image.y]);*/
+				/*
+								svgContainer = d3.select("#picture")
+									.append("svg")
+									.attr("width", 500)
+									.attr("height", 500)
+									.call(d3.zoom()
+										//.extent([[0, 0], [image.x, image.y]])
+										//.scaleExtent([.5, 20])
+										.on("zoom", function() {
+											svgContainer.attr("transform", d3.event.transform)
+										})
+									);*/
 
-				svgContainer = d3.select("body").append("svg")
+				svgContainer = d3.select("#picture")
+					.append("svg")
 					.attr("width", image.x)
-					.attr("height", image.y);
+					.attr("height", image.y)
+					.call(d3.zoom()
+							.scaleExtent([.5, 20])
+							.on("zoom", function() {
+						svgContainer.attr("transform", d3.event.transform)
+					}))
+					.append("g")
 
-				createPictureBackgroud(svgContainer, image);
+				createPictureBackgroud(image);
+
 
 				for (var i = 0; i < numberOfPixels; i++) {
-					createPixel(svgContainer, imageData["pixels"][i].x, imageData["pixels"][i].y, pixelSize, "white");
+					createPixel(imageData["pixels"][i].x, imageData["pixels"][i].y, pixelSize, pixelsColor);
 				}
 			});
-
 		};
 	}
 
-	app.controller("PictureController", PictureController);
+	app.controller("PictureController", ["$scope", "$http", PictureController]);
 }());
