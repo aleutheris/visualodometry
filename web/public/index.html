@@ -2,25 +2,27 @@
 <html ng-app="voViewer">
 
 <head>
-<meta charset="utf-8" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script src="https://d3js.org/d3.v4.js"></script>
+<meta charset="utf-8"/>
+<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Vodometry</title>
 </head>
+
 <body>
+
 	<div ng-controller="PictureController">
-		<form novalidate>
+		<form name="pictureData">
 		    <h1>Generate random white pixels inside a black background</h1><br>
-			Image Width:  <input type="text" ng-model="image.x"><br>
-			Image Height: <input type="text" ng-model="image.y"><br>
-			Number of generated pixels: <input type="text" ng-model="numberOfPixels"><br>
+			Image Width:  <input type="number" ng-model="image.x"><br>
+			Image Height: <input type="number" ng-model="image.y"><br>
+			Number of generated pixels: <input type="number" ng-model="numberOfPixels"><br>
 			<button ng-click="generate()">Generate</button><br>
 		</form>
 		<div id="picture"></div>
-		<div id="picture1"></div>
 	</div>
-	<script type="text/javascript" src="script.js"></script>
+	
 </body>
 </html>
