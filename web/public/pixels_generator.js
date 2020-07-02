@@ -3,21 +3,17 @@
 var svgContainer = {};
 var pixelSize = 1;
 var pixelsColor = "white";
+var tooltip = [];
 
 
-var tooltip = d3.select("#picture")
-	.append("div")
-	.style("position", "absolute")
-	.style("visibility", "hidden")
-	.text("I'm a pixel!");
-
-var mouseHover = function() {
-	d3.select("#background")
-		.on("mouseover", function() { return tooltip.style("visibility", "visible"); })
-		.on("mousemove", function() {
-			return tooltip.style("top", (event.pageY + 50) + "px").style("left", (event.pageX + 50) + "px");
-		})
-		.on("mouseout", function() { return tooltip.style("visibility", "hidden"); });
+var createTooltip = function(imageData, numberOfPixels) {
+	for (var i = 0; i < numberOfPixels; i++) {
+		tooltip[i] = d3.select("#picture")
+			.append("div")
+			.style("position", "absolute")
+			.style("visibility", "hidden")
+			.text("(" + imageData["pixels"][i].x + "," + imageData["pixels"][i].y + ")");
+	}
 }
 
 var createPixelsGenerator = function(image) {
@@ -41,13 +37,13 @@ var renderPictureBackgroud = function(image) {
 		.attr("y", 0)
 		.attr("width", image.x)
 		.attr("height", image.y)
-		.attr("fill", "black");
+		.attr("fill", "grey");
 }
 
 var renderPixel = function(x, y, length, color, id) {
 	svgContainer
 		.append("rect")
-		.attr("id", id)
+		.attr("id", "id" + id)
 		.attr("x", x)
 		.attr("y", y)
 		.attr("width", length)
@@ -58,14 +54,24 @@ var renderPixel = function(x, y, length, color, id) {
 var renderPixels = function(imageData, numberOfPixels) {
 	for (var i = 0; i < numberOfPixels; i++) {
 		renderPixel(imageData["pixels"][i].x, imageData["pixels"][i].y, pixelSize, pixelsColor, i);
+		mouseHover(i);
 	}
+}
+
+var mouseHover = function(id) {
+	d3.select("#id" + id)
+		.on("mouseover", function() { return tooltip[id].style("visibility", "visible"); })
+		.on("mousemove", function() {
+			return tooltip[id].style("top", (event.pageY + 50) + "px").style("left", (event.pageX + 50) + "px");
+		})
+		.on("mouseout", function() { return tooltip[id].style("visibility", "hidden"); });
 }
 
 var renderPixelsPicture = function(image, imageData, numberOfPixels) {
 	d3.select("svg").remove();
 
+	createTooltip(imageData, numberOfPixels);
 	createPixelsGenerator(image);
 	renderPictureBackgroud(image);
 	renderPixels(imageData, numberOfPixels);
-	mouseHover();
 }
