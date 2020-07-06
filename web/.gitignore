@@ -63,3 +63,10 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+# project
+.project
+.settings
+
+# libs
+functions/lib/*

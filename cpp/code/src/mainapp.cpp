@@ -1,33 +1,35 @@
 #include <iostream>
 
-#include "pixels_generator_cbridge.h"
+#include "json_bridge.hpp"
+#include "pixels_generator.hpp"
 
 
 int main(int argc, char *argv[])
 {
-  int num1 = 2;
-  int num2 = 4;
-  //int sum = Generator_get_sum(num1, num2);
-  //int sum = pixelsgenerator_get_sum(num1, num2);
-  //std::cout << sum << std::endl;
+  int error = 0;
 
-  /*
-  int length = 40;
-  int cenas[2] = {30, 40};
-  int array_cenas[2][length] = {{0}};
-  int* array_cenas_ptr = &array_cenas[0][0];
-
-  pixelsgenerator_generate_simple(cenas, length, array_cenas_ptr);
-
-  std::cout << std::endl << std::endl << std::endl;
-
-  for(int i = 0; i < length; i++)
+  if(argc == 4)
   {
-    printf("%d %d\n", array_cenas[0][i], array_cenas[1][i]);
-  }*/
+    json j;
+    JsonBridge jb;
+    PixelsGenerator pixelsgenerator;
+    ImageDimensions image_dimensions;
+    image_dimensions.x = atoi(argv[1]);
+    image_dimensions.y = atoi(argv[2]);
+    int number_of_pixels_to_generate = atoi(argv[3]);
 
+    std::vector<ImageDimensions> pixels_local = pixelsgenerator.generate_simple(image_dimensions, number_of_pixels_to_generate);
 
-  std::cout << atoi(argv[1]) + atoi(argv[2]) << std::endl;
+    j = jb.to_json(pixels_local);
 
-  return 0;
+    std::cout << j.dump() << std::endl;
+
+    error = 0;
+  }
+  else
+  {
+    error = 1;
+  }
+
+  return error;
 }

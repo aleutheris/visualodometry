@@ -13,5 +13,3 @@
 
 build/
 build_eclipse/
-*/*/.project
-*/*/*/*/*/*.cpp.o
