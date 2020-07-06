@@ -22,7 +22,7 @@
 	var app = angular.module("voViewer", [])
 
 
-	var PictureController = function($scope, $http) {
+	var FrameController = function($scope, $http) {
 		$scope.image = image;
 		$scope.numberOfPixels = numberOfPixels;
 
@@ -36,10 +36,11 @@
 
 			promise.then(function(response) {
 				var imageData = response.data;
-				renderPixelsPicture(image, imageData, numberOfPixels);
+				renderPixelsPicture("FramePixelsGenerated", image, imageData, numberOfPixels);
+				//renderPixelsPicture("FramePixelsGeneratedAndTransformed", image, imageData, numberOfPixels);
 			});
 		};
 	}
 
-	app.controller("PictureController", ["$scope", "$http", PictureController]);
+	app.controller("FrameController", ["$scope", "$http", FrameController]);
 }());

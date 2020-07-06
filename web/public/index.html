@@ -13,15 +13,17 @@
 
 <body>
 
-	<div ng-controller="PictureController">
+	<div ng-controller="FrameController">
 		<form name="pictureData">
 		    <h1>Generate random white pixels inside a grey background</h1><br>
+		    Use your middle mouse to zoom in and hover the generated pixels<br><br>
 			Image Width:  <input type="number" ng-model="image.x"><br>
 			Image Height: <input type="number" ng-model="image.y"><br>
 			Number of generated pixels: <input type="number" ng-model="numberOfPixels"><br>
 			<button ng-click="generate()">Generate</button><br>
 		</form>
-		<div id="picture"></div>
+		<div id="FramePixelsGenerated"></div>
+		<!-- <div id="FramePixelsGeneratedAndTransformed"></div>-->
 	</div>
 	
 </body>
