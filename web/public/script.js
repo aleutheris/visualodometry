@@ -1,6 +1,8 @@
 (function() {
 	"use strict";
-	
+
+	var app = angular.module("voViewer", []);
+
 	function include(file) {
 		var script = document.createElement('script');
 		script.src = file;
@@ -17,10 +19,25 @@
 	image.x = 400;
 	image.y = 400;
 	var numberOfPixels = 200;
+	var divFramePixelsGenerated = "FramePixelsGenerated";
+	var divFramePixelsGeneratedAndTransformed = "FramePixelsGeneratedAndTransformed";
 
 
-	var app = angular.module("voViewer", [])
+	app.directive("framePixelsGenerated", function() {
+		var createdTemplate = "<div id=\"" + divFramePixelsGenerated + "\"></div>";
 
+		return {
+			template: createdTemplate
+		};
+	});
+
+	app.directive("framePixelsGeneratedAndTransformed", function() {
+		var createdTemplate = "<div id=\"" + divFramePixelsGeneratedAndTransformed + "\"></div>";
+
+		return {
+			template: createdTemplate
+		};
+	});
 
 	var FrameController = function($scope, $http) {
 		$scope.image = image;
@@ -36,8 +53,8 @@
 
 			promise.then(function(response) {
 				var imageData = response.data;
-				renderPixelsPicture("FramePixelsGenerated", image, imageData, numberOfPixels);
-				//renderPixelsPicture("FramePixelsGeneratedAndTransformed", image, imageData, numberOfPixels);
+				renderPixelsPicture(divFramePixelsGenerated, image, imageData, numberOfPixels);
+				renderPixelsPicture(divFramePixelsGeneratedAndTransformed, image, imageData, numberOfPixels);
 			});
 		};
 	}

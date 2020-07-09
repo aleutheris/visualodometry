@@ -17,8 +17,13 @@ var createTooltip = function(div, imageData, numberOfPixels) {
 }
 
 var createPixelsGenerator = function(div, image) {
+	var dyncSvgPixelsGenerated = "svg" + div;
+	
+	d3.select('#' + dyncSvgPixelsGenerated).remove();
+
 	svgContainer = d3.select("#" + div)
 		.append("svg")
+		.attr("id", dyncSvgPixelsGenerated)
 		.attr("width", image.x)
 		.attr("height", image.y)
 		.call(d3.zoom()
@@ -68,8 +73,6 @@ var mouseHover = function(id) {
 }
 
 var renderPixelsPicture = function(div, image, imageData, numberOfPixels) {
-	d3.select("svg").remove();
-
 	createTooltip(div, imageData, numberOfPixels);
 	createPixelsGenerator(div, image);
 	renderPictureBackgroud(image);
