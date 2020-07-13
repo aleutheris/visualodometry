@@ -18,7 +18,7 @@ var createTooltip = function(div, imageData, numberOfPixels) {
 
 var createPixelsGenerator = function(div, image) {
 	var dyncSvgPixelsGenerated = "svg" + div;
-	
+
 	d3.select('#' + dyncSvgPixelsGenerated).remove();
 
 	svgContainer = d3.select("#" + div)
@@ -54,6 +54,8 @@ var renderPixel = function(x, y, length, color, id) {
 		.attr("width", length)
 		.attr("height", length)
 		.attr("fill", color);
+
+
 }
 
 var renderPixels = function(imageData, numberOfPixels) {
@@ -72,9 +74,33 @@ var mouseHover = function(id) {
 		.on("mouseout", function() { return tooltip[id].style("visibility", "hidden"); });
 }
 
-var renderPixelsPicture = function(div, image, imageData, numberOfPixels) {
+
+function setPixel(imageData, x, y, r, g, b, a) {
+	var index = (x + y * imageData.width) * 4;
+	imageData.data[index + 0] = r;
+	imageData.data[index + 1] = g;
+	imageData.data[index + 2] = b;
+	imageData.data[index + 3] = a;
+}
+
+var renderPixelsPicture = function(div, image, pixelsGenerated, numberOfPixels) {/*
 	createTooltip(div, imageData, numberOfPixels);
 	createPixelsGenerator(div, image);
 	renderPictureBackgroud(image);
-	renderPixels(imageData, numberOfPixels);
+	renderPixels(imageData, numberOfPixels);*/
+
+
+	var canvas = document.getElementById("canvas1");
+	var ctx = canvas.getContext("2d");
+	ctx.fillStyle = "black";
+	ctx.fillRect(0, 0, image.x, image.y);
+
+	//var imageData = ctx.createImageData(image.x, image.x);
+	var imageData = ctx.getImageData(0, 0, image.x, image.y);
+
+	for (var i = 0; i < numberOfPixels; i++) {
+		setPixel(imageData, pixelsGenerated["pixels"][i].x, pixelsGenerated["pixels"][i].y, 255, 255, 255, 255);
+	}
+
+	ctx.putImageData(imageData, 0, 0);
 }

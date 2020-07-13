@@ -39,6 +39,7 @@
 		};
 	});
 
+
 	var FrameController = function($scope, $http) {
 		$scope.image = image;
 		$scope.numberOfPixels = numberOfPixels;
@@ -52,9 +53,9 @@
 			//var promise = $http.get("https://us-central1-vodometry.cloudfunctions.net/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
 
 			promise.then(function(response) {
-				var imageData = response.data;
-				renderPixelsPicture(divFramePixelsGenerated, image, imageData, numberOfPixels);
-				renderPixelsPicture(divFramePixelsGeneratedAndTransformed, image, imageData, numberOfPixels);
+				var pixelsGenerated = response.data;
+				renderPixelsPicture(divFramePixelsGenerated, image, pixelsGenerated, numberOfPixels);
+				//renderPixelsPicture(divFramePixelsGeneratedAndTransformed, image, imageData, numberOfPixels);
 			});
 		};
 	}

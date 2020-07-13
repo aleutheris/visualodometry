@@ -2,10 +2,10 @@
 <html ng-app="voViewer">
 
 <head>
-<meta charset="utf-8"/>
-<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<meta charset="utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
-<script type="text/javascript" src="script.js"></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Vodometry</title>
@@ -15,16 +15,20 @@
 
 	<div ng-controller="FrameController">
 		<form name="pictureData">
-		    <h1>Generate random white pixels inside a grey background</h1><br>
-		    Use your middle mouse to zoom in and hover the generated pixels<br><br>
-			Image Width:  <input type="number" ng-model="image.x"><br>
+			<h1>Generate random white pixels inside a grey background</h1>
+			<br> Use your middle mouse to zoom in and hover the generated
+			pixels<br>
+			<br> Image Width: <input type="number" ng-model="image.x"><br>
 			Image Height: <input type="number" ng-model="image.y"><br>
-			Number of generated pixels: <input type="number" ng-model="numberOfPixels"><br>
-			<button ng-click="generate()">Generate</button><br>
-		</form>
+			Number of generated pixels: <input type="number"
+				ng-model="numberOfPixels"><br>
+			<button ng-click="generate()">Generate</button>
+			<br>
+		</form><!-- 
 		<frame-pixels-generated></frame-pixels-generated>
-		<frame-pixels-generated-and-transformed></frame-pixels-generated-and-transformed>
+		<frame-pixels-generated-and-transformed></frame-pixels-generated-and-transformed>-->
+		<canvas id="canvas1" width="400" height="400"></canvas>
+		<script type="text/javascript" src="script.js"></script>
 	</div>
-
 </body>
 </html>
