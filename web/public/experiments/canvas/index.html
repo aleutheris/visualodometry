@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+	<div class="container" ng-app="myApp" ng-controller="Example">
+		<div class="row">
+			<div class="jumbotron">
+				<div class="container">
+					<h1>Controling canvas using AngularJS</h1>
+					<p>
+						I found the cute litle pen by <a
+							href="https://codepen.io/kelsar/details/wAepl">Kelsar</a> which
+						drawed a pattern, but if you wanted to change the colors you had
+						to change javascript. So I added a simple
+						<code>AngularJS</code>
+						control panel.
+					</p>
+				</div>
+			</div>
+			<canvas class="col-md-8" id="board" width="600" height="275"></canvas>
+			<div class="col-md-4">
+				<form action="" method="POST" class="form-inline" role="form">
+
+					<div class="form-group">
+						<label class="md-only" for="sq">Square</label> <input type="color"
+							ng-model="sq" id="sq" /> <label class="md-only" for="sq"><code>{{sq}}</code></label>
+						<br /> <label class="md-only" for="t1">Triangle 1</label> <input
+							type="color" ng-model="t1" id="t1" /> <label class="md-only"
+							for="t1"><code>{{t1}}</code></label> <br /> <label
+							class="md-only" for="t2">Triangle 2</label> <input type="color"
+							ng-model="t2" id="t2" /> <label class="md-only" for="t2"><code>{{t2}}</code></label>
+						<br /> <label class="md-only" for="st">Stroke</label> <input
+							type="color" ng-model="st" id="st" /> <label class="md-only"
+							for="st"><code>{{st}}</code></label> <br /> <label
+							class="md-only" for="stw">Stroke width</label> <input
+							type="range" ng-model="stw" min="1" max="30" id="stw" />
+						<code>{{stw}}</code>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="container"></div>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
