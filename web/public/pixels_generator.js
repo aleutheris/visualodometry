@@ -13,9 +13,14 @@ function setPixel(ctx, x, y) {
 	ctx.fill();
 }
 
-var renderPixelsPicture = function(ctx, image, pixelsGenerated, numberOfPixels, relativeScale, positionX, positionY) {
+var renderPixelsPicture = function(ctx, image, pixelsGenerated, numberOfPixels, scale, previousScale, positionX, positionY) {
+	var relativeScale = scale / previousScale;
+
 	ctx.clearRect(0, 0, image.x, image.y);
 	ctx.beginPath();
+	
+	positionX /= scale;
+	positionY /= scale;
 
 	ctx.scale(relativeScale, relativeScale);
 	ctx.fillStyle = "black";

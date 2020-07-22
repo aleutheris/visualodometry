@@ -19,32 +19,21 @@
 	image.x = 400;
 	image.y = 400;
 	var numberOfPixels = 200;
-	var divFramePixelsGenerated = "FramePixelsGenerated";
-	var divFramePixelsGeneratedAndTransformed = "FramePixelsGeneratedAndTransformed";
-	var canvas = document.getElementById("canvas1");
+	//var divFramePixelsGenerated = "FramePixelsGenerated";
+	var canvas = document.getElementById("canvasFramePixelsGenerated");
 	var ctx = canvas.getContext("2d");
 	var pixelsGenerated = {};
 
-
-	app.directive("framePixelsGenerated", function() {
-		var createdTemplate = "<div id=\"" + divFramePixelsGenerated + "\"></div>";
-
-		return {
-			template: createdTemplate
-		};
-	});
-
-	app.directive("framePixelsGeneratedAndTransformed", function() {
-		var createdTemplate = "<div id=\"" + divFramePixelsGeneratedAndTransformed + "\"></div>";
-
-		return {
-			template: createdTemplate
-		};
-	});
-
+	/*
+		app.directive("framePixelsGenerated", function() {
+			var createdTemplate = "<div id=\"" + divFramePixelsGenerated + "\"></div>";
+	
+			return {
+				template: createdTemplate
+			};
+		});*/
 
 	var FrameController = function($scope, $http) {
-		$scope.scale = 1;
 		$scope.image = image;
 		$scope.numberOfPixels = numberOfPixels;
 		var mouseX = 0;
@@ -78,7 +67,7 @@
 				imagePositionX = mouseX - mouseDownX;
 				imagePositionY = mouseY - mouseDownY;
 
-				renderPixelsPicture(ctx, image, pixelsGenerated, numberOfPixels, $scope.scale / previousScale, imagePositionX, imagePositionY);
+				renderPixelsPicture(ctx, image, pixelsGenerated, numberOfPixels, $scope.scale, previousScale, imagePositionX, imagePositionY);
 			}
 		};
 
@@ -91,23 +80,26 @@
 		};
 
 		$scope.generate = function() {
-			image.x = $scope.image.x;
-			image.y = $scope.image.y;
-			numberOfPixels = $scope.numberOfPixels;
-
 			var promise = $http.get("http://localhost:5001/vodometry/us-central1/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
 			//var promise = $http.get("https://us-central1-vodometry.cloudfunctions.net/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
 
 			promise.then(function(response) {
+				$scope.scale = 1;
+				image.x = $scope.image.x;
+				image.y = $scope.image.y;
+				numberOfPixels = $scope.numberOfPixels;
+				imagePositionX = 0;
+				imagePositionY = 0;
+
 				pixelsGenerated = response.data;
-				renderPixelsPicture(ctx, image, pixelsGenerated, numberOfPixels, $scope.scale / previousScale, 0, 0);
+				renderPixelsPicture(ctx, image, pixelsGenerated, numberOfPixels, $scope.scale, previousScale, imagePositionX, imagePositionY);
 				previousScale = $scope.scale;
 			});
 		};
 
 		$scope.$watch("scale", function(newValue, oldValue) {
 			if (newValue != oldValue) {
-				renderPixelsPicture(ctx, image, pixelsGenerated, numberOfPixels, $scope.scale / previousScale, imagePositionX, imagePositionY);
+				renderPixelsPicture(ctx, image, pixelsGenerated, numberOfPixels, $scope.scale, previousScale, imagePositionX, imagePositionY);
 				previousScale = $scope.scale;
 			}
 		});
