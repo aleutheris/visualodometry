@@ -67,6 +67,3 @@ node_modules/
 # project
 .project
 .settings
-
-# libs
-functions/lib/*
