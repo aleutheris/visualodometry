@@ -24,18 +24,40 @@
 				ng-model="numberOfPixels"><br>
 			<button ng-click="generate()">Generate</button>
 			<br>
-		</form><!-- 
-		<frame-pixels-generated></frame-pixels-generated>
-		<frame-pixels-generated-and-transformed></frame-pixels-generated-and-transformed>-->
-		<canvas ng-mousemove="mouseMove($event)" 
+		</form>
+
+		<div id="divImagePixelsGenerated">
+			<canvas id="canvasImagePixelsGenerated"
+				ng-mousemove="mouseMove($event)"
 				ng-mousedown="mouseDown($event)" 
-				ng-mouseup="mouseUp()" 
-				ng-mouseout="mouseOut()" id="canvasFramePixelsGenerated" width="400" height="400"></canvas>
-		<br/>
-		<label for="scale">Zoom</label>
-		<input type="range" ng-model="scale" min="1" max="6" id="scale"/>
-		<code>{{scale}}x</code><br>
-		<framePixelsGenerated></framePixelsGenerated>
+				ng-mouseup="mouseUp()"
+				ng-mouseout="mouseOut()"
+				width="400"
+				height="400">
+			</canvas>
+			<br>
+			<label for="scale">Zoom</label>
+			<input type="range" ng-model="scale" min="1" max="6" id="scale"/>
+			<code>{{scale}}x</code>
+			<br>
+		</div>
+		<!-- 
+		<div id="divImagePixelsGeneratedTransformation">
+			<canvas id="canvasImagePixelsGenerated"
+				ng-mousemove="mouseMove($event)"
+				ng-mousedown="mouseDown($event)" 
+				ng-mouseup="mouseUp()"
+				ng-mouseout="mouseOut()"
+				width="400"
+				height="400">
+			</canvas>
+			<br>
+			<label for="scale">Zoom</label>
+			<input type="range" ng-model="scale" min="1" max="6" id="scale"/>
+			<code>{{scale}}x</code>
+			<br>
+		</div> -->
+		
 		<script type="text/javascript" src="script.js"></script>
 	</div>
 </body>

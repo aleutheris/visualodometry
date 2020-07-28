@@ -20,7 +20,7 @@
 	image.y = 400;
 	var numberOfPixels = 200;
 	//var divFramePixelsGenerated = "FramePixelsGenerated";
-	var canvas = document.getElementById("canvasFramePixelsGenerated");
+	var canvas = document.getElementById("canvasImagePixelsGenerated");
 	var ctx = canvas.getContext("2d");
 	var pixelsGenerated = {};
 
@@ -34,6 +34,7 @@
 		});*/
 
 	var FrameController = function($scope, $http) {
+		$scope.scale = 1;
 		$scope.image = image;
 		$scope.numberOfPixels = numberOfPixels;
 		var mouseX = 0;
@@ -80,14 +81,14 @@
 		};
 
 		$scope.generate = function() {
-			var promise = $http.get("http://localhost:5001/vodometry/us-central1/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
-			//var promise = $http.get("https://us-central1-vodometry.cloudfunctions.net/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
+			numberOfPixels = $scope.numberOfPixels;
+			//var promise = $http.get("http://localhost:5001/vodometry/us-central1/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
+			var promise = $http.get("https://us-central1-vodometry.cloudfunctions.net/app/x=" + image.x + "&y=" + image.y + "&numberpixels=" + numberOfPixels);
 
 			promise.then(function(response) {
 				$scope.scale = 1;
 				image.x = $scope.image.x;
 				image.y = $scope.image.y;
-				numberOfPixels = $scope.numberOfPixels;
 				imagePositionX = 0;
 				imagePositionY = 0;
 
