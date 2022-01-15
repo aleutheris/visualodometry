@@ -15,7 +15,7 @@
   "dependencies": {
     "firebase-admin": "^8.12.1",
     "firebase-functions": "^3.7.0",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.5"
   },
   "devDependencies": {
     "eslint": "^5.12.0",
